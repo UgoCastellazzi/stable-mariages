@@ -1,7 +1,55 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+User.destroy_all
+Poll.destroy_all
+Receiver.destroy_all
+Match.destroy_all
+Respondent.destroy_all
+puts "DB cleaned!"
+
+agathe = User.new(
+  name: "Agathe",
+  email: "agathe@test.com",
+  password: "Test1234"
+)
+agathe.save!
+
+poll = Poll.new(
+  name: "Poll 1",
+  user: agathe
+)
+poll.save!
+
+puts "creating receivers"
+5.times do 
+  receiver = Receiver.new(
+    name: Faker::Company.name,
+    capacity: rand(1..5),
+    poll: poll
+  )
+  receiver.save!
+end
+puts "receivers created!"
+
+puts "creating respondents"
+5.times do 
+  respondent = Respondent.new(
+    name: Faker::Name.name,
+    poll: poll
+  )
+  respondent.save!
+end
+respondents = Respondent.all
+puts "respondents created!"
+
+puts "creating respondent wishes"
+respondents.each do |respondent|
+  receivers = Receiver.all
+  while respondent.wishes.length < Receiver.all.length do
+    current_wish = receivers.sample
+    respondent.wishes << current_wish.id
+    receivers = receivers.reject{ |k| k==current_wish}
+  end
+  respondent.save!
+end
+puts "respondent wishes created"
