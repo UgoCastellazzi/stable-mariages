@@ -31,8 +31,14 @@ puts "creating receivers"
 end
 puts "receivers created!"
 
-puts "creating respondents"
-5.times do 
+puts "computing capacity"
+capacity = 0
+Receiver.all.each do |receiver|
+  capacity += receiver.capacity
+end
+
+puts "creating #{capacity} respondents"
+capacity.times do 
   respondent = Respondent.new(
     name: Faker::Name.name,
     poll: poll
