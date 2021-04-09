@@ -1,0 +1,7 @@
+<h1>Edit a receiver</h1>
+
+<%= simple_form_for(@receiver) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :capacity %>
+  <%= f.submit "Edit receiver", class: "btn btn-primary" %>
+<% end %>
