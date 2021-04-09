@@ -1,0 +1,9 @@
+<p>Créer un respondent</p>
+<%= simple_form_for [ @poll, @respondent ] do |f| %>
+  <%= f.input :name %>
+  <%= f.fields_for :wishes, OpenStruct.new(f.object.wishes || {}) do |f2|  %>
+  <%= f2.text_field :wish %>
+  <%end %>
+  <%= f.submit "Create respondent", class: "btn btn-primary" %>
+
+<% end %>

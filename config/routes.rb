@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :polls, only: [:new, :create, :show, :edit, :update, :destroy] do
     resources :receivers, only: [ :new, :create ]
+    resources :respondents, only: [ :new, :create ]
   end
   resources :receivers, only: [:edit, :update, :destroy]
 end

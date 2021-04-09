@@ -9,10 +9,14 @@
             data: { confirm: "Are you sure?" } %>
       </li>
   <% end %>
+  <p><%= @poll.respondents.length %> respondents</p>
 </ul>
 
+<p>Créer un receiver</p>
 <%= simple_form_for [ @poll, @receiver ] do |f| %>
   <%= f.input :name %>
   <%= f.input :capacity %>
   <%= f.submit "Create receiver", class: "btn btn-primary" %>
 <% end %>
+
+<%= link_to "Partager le lien d'inscription", new_poll_respondent_path(@poll) %>

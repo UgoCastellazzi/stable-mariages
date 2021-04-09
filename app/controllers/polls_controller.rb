@@ -4,6 +4,7 @@ class PollsController < ApplicationController
     @poll = Poll.find(params[:id])
     authorize @poll
     @receiver = Receiver.new
+    @respondent = Respondent.new
   end
 
   def new
