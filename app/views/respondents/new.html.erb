@@ -1,0 +1,6 @@
+<p>Créer un respondent</p>
+<%= simple_form_for [ @poll, @respondent ] do |f| %>
+  <%= f.input :name %>
+  <%= f.submit "Create respondent", class: "btn btn-primary" %>
+
+<% end %>
